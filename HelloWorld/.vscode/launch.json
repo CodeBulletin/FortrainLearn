@@ -1,0 +1,17 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "Fortran Debug (GDB)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/build/${workspaceFolderBasename}.out",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceRoot}",
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "preLaunchTask": "Build Debug"
+        }
+    ]
+}

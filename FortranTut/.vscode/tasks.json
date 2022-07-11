@@ -1,0 +1,190 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build and Run",
+            "type": "shell",
+            "dependsOn": [
+                "Make",
+                "Build",
+                "Run"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build and Run Current",
+            "type": "shell",
+            "dependsOn": [
+                "Make",
+                "Build Current",
+                "Run Current"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build Only",
+            "type": "shell",
+            "dependsOn": [
+                "Make",
+                "Build"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build Debug",
+            "type": "shell",
+            "dependsOn": [
+                "Make",
+                "BuildD"
+            ],
+            "dependsOrder": "sequence",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "Make",
+            "type": "shell",
+            "command": "if [ ! -d \"./build\" ]; then mkdir build; echo \"Build Folder Created\"; fi",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "./.vscode/build.sh",
+            "args": [
+                "\"f95 f90\"",
+                "\"\"",
+                "\"build/\"",
+                "\"\"",
+                "-O3",
+                "-Wall"
+            ],
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "BuildD",
+            "type": "shell",
+            "command": "./.vscode/build.sh",
+            "args": [
+                "\"f95 f90\"",
+                "\"\"",
+                "\"build/\"",
+                "\"\"",
+                "-Wall",
+                "-g",
+                "-O0",
+                "-ggdb3",
+                "-Wextra",
+            ],
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "Build Current",
+            "type": "shell",
+            "command": "gfortran",
+            "args": [
+                "-o",
+                "./build/${fileBasenameNoExtension}.out",
+                "${file}",
+                "-Wall",
+            ],
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "Run",
+            "type": "shell",
+            "command": "./build/${workspaceFolderBasename}.out",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            }
+        },
+        {
+            "label": "Run Current",
+            "type": "shell",
+            "command": "./build/${fileBasenameNoExtension}.out",
+            "presentation": {
+                "echo": false,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": true
+            }
+        }
+    ]
+}
